@@ -3,88 +3,137 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kenneth Ho Kwan Wong · 個人資歷簡介（CSMA Family）</title>
+  <title>Kenneth Ho Kwan Wong · 黃浩均 — 個人資歷簡介（CSMA Family）</title>
   <style>
     :root {
-      --bg: #f6f4f0;
-      --paper: #fffef9;
-      --ink: #1a1a1a;
-      --muted: #5c5c5c;
-      --accent: #2d6a4f;
-      --line: #e0ddd4;
-      --font: "Segoe UI", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
-      --serif: "Georgia", "Times New Roman", "Songti TC", "PMingLiU", serif;
+      --bg: #ffffff;
+      --ink: #111;
+      --muted: #5a5a5a;
+      --accent: #1a6b4a;
+      --hairline: #e8e8e8;
+      --font: "Segoe UI", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
+      --serif: "Georgia", "Songti TC", "PMingLiU", ui-serif, serif;
+      --lang-bar-h: 2.25rem;
     }
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: var(--font);
       color: var(--ink);
       background: var(--bg);
-      line-height: 1.65;
+      line-height: 1.6;
     }
     body.lightbox-on { overflow: hidden; }
-    .wrap {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 2rem 1.25rem 3.5rem;
+
+    .lang-bar {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      height: var(--lang-bar-h);
+      border-bottom: 1px solid var(--hairline);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
     }
+    .lang-bar button {
+      margin: 0;
+      padding: 0 0.85rem;
+      height: 100%;
+      border: none;
+      background: transparent;
+      font: inherit;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.15s ease;
+    }
+    .lang-bar button:hover {
+      color: var(--ink);
+    }
+    .lang-bar button.is-active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .lang-bar .sep {
+      width: 1px;
+      height: 0.9rem;
+      background: var(--hairline);
+    }
+
+    .page {
+      max-width: min(104rem, calc(100vw - 1.5rem));
+      margin: 0 auto;
+      padding: 2rem 0.75rem 4rem;
+    }
+    @media (min-width: 540px) {
+      .page { padding-left: 1.25rem; padding-right: 1.25rem; }
+    }
+    @media (min-width: 900px) {
+      .page { padding-left: 2rem; padding-right: 2rem; }
+    }
+
     header {
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 1.5rem;
+      padding-bottom: 1.75rem;
       margin-bottom: 2rem;
+      border-bottom: 1px solid var(--hairline);
     }
     h1 {
       font-family: var(--serif);
-      font-size: clamp(1.55rem, 4vw, 2rem);
+      font-size: clamp(1.4rem, 4vw, 1.75rem);
       font-weight: 600;
-      margin: 0 0 0.35rem;
-      letter-spacing: 0.02em;
+      margin: 0 0 0.4rem;
+      letter-spacing: 0.01em;
+      line-height: 1.25;
     }
     .tagline {
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       margin: 0;
     }
     .badge {
       display: inline-block;
-      margin-top: 0.75rem;
-      padding: 0.2rem 0.65rem;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-size: 0.8rem;
+      margin-top: 1rem;
+      font-size: 0.78rem;
       color: var(--accent);
+      letter-spacing: 0.02em;
     }
+
+    section { margin-bottom: 2.75rem; }
     h2 {
       font-family: var(--serif);
-      font-size: 1.2rem;
-      margin: 2.25rem 0 0.75rem;
-      padding-top: 0.5rem;
-      border-top: 1px solid var(--line);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 0 0 1rem;
+      color: var(--ink);
     }
-    h2:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
     h3 {
-      font-size: 1rem;
-      margin: 1.5rem 0 0.6rem;
-      color: var(--accent);
-    }
-    .req {
       font-size: 0.85rem;
+      font-weight: 600;
+      margin: 1.75rem 0 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    h3:first-of-type { margin-top: 0; }
+
+    .note {
+      font-size: 0.82rem;
       color: var(--muted);
       margin: 0 0 1rem;
     }
-    .card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-    figure {
-      margin: 0;
-    }
-    .thumb-btn {
+
+    p { margin: 0 0 1rem; }
+    p:last-child { margin-bottom: 0; }
+    a { color: var(--accent); text-underline-offset: 0.15em; }
+
+    figure { margin: 0; }
+
+    .thumb {
       display: block;
       width: 100%;
       margin: 0;
@@ -93,139 +142,132 @@
       background: transparent;
       cursor: zoom-in;
       font: inherit;
-      color: inherit;
     }
-    .thumb-btn:focus-visible {
+    .thumb:focus-visible {
       outline: 2px solid var(--accent);
-      outline-offset: 3px;
+      outline-offset: 2px;
     }
-    .photo-main .thumb-btn img {
+
+    figure.hero {
+      max-width: min(100%, 38rem);
+      margin-inline: auto;
+    }
+    .hero img {
       width: 100%;
       height: auto;
+      max-height: min(52vh, 28rem);
       display: block;
-      border-radius: 8px;
-      vertical-align: middle;
+      object-fit: contain;
+      border-radius: 2px;
     }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+      gap: 1.25rem;
     }
-    .piece {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      overflow: hidden;
+    @media (min-width: 900px) {
+      .grid {
+        grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+      }
     }
-    .piece > .thumb-btn > img {
+
+    .tile {
+      border-top: 1px solid var(--hairline);
+      padding-top: 0.75rem;
+    }
+    .tile .thumb > img {
       width: 100%;
-      height: 200px;
+      height: 11rem;
       object-fit: cover;
       display: block;
+      border-radius: 2px;
     }
-    .piece.thumb-portrait .img-wrap {
+    .tile--portrait .thumb {
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 220px;
-      max-height: 340px;
-      background: #e8e4db;
-      padding: 0.45rem 0.35rem;
+      min-height: 13rem;
+      max-height: 16rem;
+      background: #fafafa;
+      padding: 0.5rem;
+      border-radius: 2px;
     }
-    .piece.thumb-portrait .img-wrap .thumb-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-height: 300px;
-    }
-    .piece.thumb-portrait .img-wrap img {
+    .tile--portrait .thumb > img {
       width: auto;
       max-width: 100%;
       height: auto;
-      max-height: 300px;
+      max-height: 15rem;
       object-fit: contain;
-      object-position: center;
-      display: block;
     }
-    .piece .cap {
-      padding: 0.65rem 0.85rem 0.85rem;
-      font-size: 0.82rem;
+    .label {
+      margin: 0.5rem 0 0;
+      font-size: 0.75rem;
       font-weight: 600;
-      color: var(--accent);
-    }
-    .bilingual {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-    @media (min-width: 720px) {
-      .bilingual { grid-template-columns: 1fr 1fr; }
-    }
-    .bilingual .card h3 { margin-top: 0; }
-    ul { margin: 0.4rem 0 0; padding-left: 1.2rem; }
-    a { color: var(--accent); }
-    footer {
-      margin-top: 2.5rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--line);
-      font-size: 0.78rem;
       color: var(--muted);
+      letter-spacing: 0.03em;
     }
 
-    /* Lightbox — minimal white */
+    .panel {
+      padding-top: 1rem;
+      border-top: 1px solid var(--hairline);
+      max-width: 50rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--hairline);
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
     .lightbox {
       position: fixed;
       inset: 0;
       z-index: 10000;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      gap: 0.75rem;
+      padding: max(1.25rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right)) max(1.25rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left));
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       cursor: zoom-out;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.22s ease, visibility 0.22s ease;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
     }
     .lightbox.is-open {
       opacity: 1;
       visibility: visible;
     }
-    .lightbox-inner {
-      position: relative;
-      max-width: min(96vw, 1320px);
-      max-height: 92vh;
-      margin: auto;
-      cursor: default;
-    }
-    .lightbox-inner:focus {
-      outline: none;
-    }
-    .lightbox-inner:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 6px;
-      border-radius: 4px;
-    }
     .lightbox-img {
+      cursor: default;
       display: block;
-      max-width: min(96vw, 1320px);
-      max-height: 86vh;
+      max-width: min(94vw, 72rem);
+      max-height: 82vh;
       width: auto;
       height: auto;
       object-fit: contain;
-      margin: 0 auto;
-      border-radius: 4px;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+      border-radius: 2px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    }
+    .lightbox-img:focus { outline: none; }
+    .lightbox-img:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
     }
     .lightbox-caption {
-      margin: 14px 0 0;
+      margin: 0;
       text-align: center;
       color: var(--muted);
-      font-size: 0.875rem;
+      font-size: 0.8rem;
       font-weight: 500;
-      letter-spacing: 0.02em;
+      cursor: default;
     }
     .lightbox-caption[hidden] {
       display: none;
@@ -233,128 +275,250 @@
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <nav class="lang-bar" aria-label="Language">
+    <button type="button" id="lang-zh" data-lang="zh-Hant" class="is-active" aria-pressed="true">中文</button>
+    <span class="sep" aria-hidden="true"></span>
+    <button type="button" id="lang-en" data-lang="en" aria-pressed="false">English</button>
+  </nav>
+
+  <main class="page">
     <header>
-      <h1>Kenneth Ho Kwan Wong · 黃浩均</h1>
-      <p class="tagline">視覺藝術／創意藝術導師 · 註冊教師（香港）· UK QTS · 可英語授課</p>
-      <span class="badge">擬任教：多元創意藝術｜塑膠彩｜水彩</span>
+      <h1 data-i18n="title_h1">Kenneth Ho Kwan Wong · 黃浩均</h1>
+      <p class="tagline" data-i18n="tagline">視覺藝術／創意藝術導師 · 註冊教師（香港）· UK QTS · 可英語授課</p>
+      <p class="badge" data-i18n="badge">擬任教：多元創意藝術｜塑膠彩｜水彩</p>
     </header>
 
-    <section id="photo">
-      <h2>（一）形象／教學／創作照片</h2>
-      <figure class="card photo-main">
-        <button type="button" class="thumb-btn lightbox-trigger" data-caption="教學照片" aria-label="放大檢視：教學照片">
+    <section id="photo" aria-labelledby="h-photo">
+      <h2 id="h-photo" data-i18n="h_photo">（一）形象／教學／創作照片</h2>
+      <figure class="hero">
+        <button type="button" class="thumb lightbox-trigger" data-cap="teaching" aria-label="放大檢視：教學照片">
           <img src="teaching_photo.webp" alt="教學照片" width="1200" height="800" loading="lazy" decoding="async" />
         </button>
       </figure>
     </section>
 
-    <section id="works">
-      <h2>（二）個人視藝作品（分列擬任教項目）</h2>
+    <section id="works" aria-labelledby="h-works">
+      <h2 id="h-works" data-i18n="h_works">（二）個人視藝作品（分列擬任教項目）</h2>
 
-      <h3>塑膠彩課程</h3>
+      <h3 data-i18n="h_acrylic">塑膠彩課程</h3>
       <div class="grid">
-        <div class="piece">
-          <button type="button" class="thumb-btn lightbox-trigger" data-caption="塑膠彩" aria-label="放大檢視：塑膠彩">
+        <article class="tile">
+          <button type="button" class="thumb lightbox-trigger" data-cap="acrylic" aria-label="放大檢視：塑膠彩">
             <img src="acrylic_0.webp" alt="塑膠彩" loading="lazy" decoding="async" />
           </button>
-          <div class="cap">塑膠彩</div>
-        </div>
-        <div class="piece thumb-portrait">
-          <div class="img-wrap">
-            <button type="button" class="thumb-btn lightbox-trigger" data-caption="塑膠彩" aria-label="放大檢視：塑膠彩">
-              <img src="acrylic_自由的窗口.webp" alt="塑膠彩" loading="lazy" decoding="async" />
-            </button>
-          </div>
-          <div class="cap">塑膠彩</div>
-        </div>
+          <p class="label" data-i18n="cap_acrylic">塑膠彩</p>
+        </article>
+        <article class="tile tile--portrait">
+          <button type="button" class="thumb lightbox-trigger" data-cap="acrylic" aria-label="放大檢視：塑膠彩">
+            <img src="acrylic_自由的窗口.webp" alt="塑膠彩" loading="lazy" decoding="async" />
+          </button>
+          <p class="label" data-i18n="cap_acrylic">塑膠彩</p>
+        </article>
       </div>
 
-      <h3>多元創意藝術課程</h3>
+      <h3 data-i18n="h_multimedia">多元創意藝術課程</h3>
       <div class="grid">
-        <div class="piece">
-          <button type="button" class="thumb-btn lightbox-trigger" data-caption="拼貼、混合媒材" aria-label="放大檢視：拼貼、混合媒材">
+        <article class="tile">
+          <button type="button" class="thumb lightbox-trigger" data-cap="mixed" aria-label="放大檢視：拼貼、混合媒材">
             <img src="multimedia_拼貼畫2.webp" alt="拼貼、混合媒材" loading="lazy" decoding="async" />
           </button>
-          <div class="cap">拼貼、混合媒材</div>
-        </div>
-        <div class="piece thumb-portrait">
-          <div class="img-wrap">
-            <button type="button" class="thumb-btn lightbox-trigger" data-caption="拼貼畫" aria-label="放大檢視：拼貼畫">
-              <img src="multimedia_拼貼畫1.webp" alt="拼貼畫" loading="lazy" decoding="async" />
-            </button>
-          </div>
-          <div class="cap">拼貼畫</div>
-        </div>
+          <p class="label" data-i18n="cap_mixed">拼貼、混合媒材</p>
+        </article>
+        <article class="tile tile--portrait">
+          <button type="button" class="thumb lightbox-trigger" data-cap="collage" aria-label="放大檢視：拼貼畫">
+            <img src="multimedia_拼貼畫1.webp" alt="拼貼畫" loading="lazy" decoding="async" />
+          </button>
+          <p class="label" data-i18n="cap_collage">拼貼畫</p>
+        </article>
       </div>
 
-      <h3>水彩課程</h3>
+      <h3 data-i18n="h_watercolour">水彩課程</h3>
       <div class="grid">
-        <div class="piece">
-          <button type="button" class="thumb-btn lightbox-trigger" data-caption="水彩" aria-label="放大檢視：水彩">
+        <article class="tile">
+          <button type="button" class="thumb lightbox-trigger" data-cap="watercolour" aria-label="放大檢視：水彩">
             <img src="watercolour_cablecar.webp" alt="水彩" loading="lazy" decoding="async" />
           </button>
-          <div class="cap">水彩</div>
-        </div>
-        <div class="piece">
-          <button type="button" class="thumb-btn lightbox-trigger" data-caption="水彩" aria-label="放大檢視：水彩">
+          <p class="label" data-i18n="cap_watercolour">水彩</p>
+        </article>
+        <article class="tile">
+          <button type="button" class="thumb lightbox-trigger" data-cap="watercolour" aria-label="放大檢視：水彩">
             <img src="watercolour_redcliff.webp" alt="水彩" loading="lazy" decoding="async" />
           </button>
-          <div class="cap">水彩</div>
-        </div>
+          <p class="label" data-i18n="cap_watercolour">水彩</p>
+        </article>
       </div>
     </section>
 
-    <section id="bio">
-      <h2>（三）個人文字簡介（可英語授課 · 中英對照）</h2>
-      <div class="bilingual">
-        <div class="card">
-          <h3>中文</h3>
-          <p>黃浩均（Kenneth Ho Kwan Wong）畢業於香港理工大學視覺傳達設計，其後於英國愛丁堡大學取得聲音設計碩士，並在英國伯明翰大學完成中學設計與科技科 PGCE，現為香港註冊教師及英國合資格教師（QTS）。</p>
-          <p>藝術方面，他早年修讀視覺藝術，於 HKCEE 與 HKAL 視覺藝術科皆考獲 A 級，先以藝術創作為起點，其後再延伸及平面與多媒體設計，並長期從事跨領域創作；亦曾於英國中學任設計與科技教師及班主任，熟悉課堂管理、專業繪圖、評估與照顧多元學習需要。2026 年回港後於本港中學任教視覺藝術，指導非華語學生完成 HKDSE SBA 及課業紀錄，教授超現實主義、立體主義與極簡主義等課題。</p>
-          <p><strong>擬任教科目：</strong>多元創意藝術（混合媒體、拼貼與綜合創作）、塑膠彩、水彩。</p>
-          <p><strong>教學理念：</strong>相信「透過動手、邊做邊觀察」，理解會慢慢成形；以實作帶動思考，配合示範，讓不同年齡學員累積經驗、發展個人視覺語言。授課語言：粵語、英語、普通話。</p>
-        </div>
-        <div class="card">
-          <h3>English</h3>
-          <p>Kenneth Ho Kwan Wong holds a BA in Visual Communication Design (Hong Kong Polytechnic University), an MSc in Sound Design (University of Edinburgh), and a PGCE in Secondary Design and Technology (University of Birmingham). He is a Hong Kong registered teacher and holds UK Qualified Teacher Status (QTS).</p>
-          <p>His creative path began with visual art in secondary school: he achieved Grade A in HKCEE Visual Art and HKAL Visual Art, and worked from an art-making starting point before extending into visual communication / multimedia design and broader cross-disciplinary practice. He taught Design &amp; Technology in UK secondary schools (including as a Year 7 form tutor), with strong experience in classroom management, technical drawings, assessment, and supporting diverse learners. He returned to Hong Kong in 2026 to teach visual arts in local secondary schools, including HKDSE SBA support for NCS students and units on surrealism, cubism, and minimalism.</p>
-          <p><strong>Courses offered:</strong> Multi-media creative arts (mixed media and collage-led projects), acrylic painting, and watercolour.</p>
-          <p><strong>Teaching approach:</strong> practice-led learning: students learn by doing, noticing how materials and colour behave, and reflecting as they work; with clear demonstrations to build confidence and a personal visual voice. Languages: Cantonese, English, Mandarin.</p>
-        </div>
-      </div>
+    <section id="bio" aria-labelledby="h-bio">
+      <h2 id="h-bio" data-i18n="h_bio">（三）個人文字簡介</h2>
+      <article class="panel">
+        <p data-i18n="bio_1"></p>
+        <p data-i18n="bio_2"></p>
+        <p><strong data-i18n="bio_strong_courses"></strong><span data-i18n="bio_courses"></span></p>
+        <p><strong data-i18n="bio_strong_teaching"></strong><span data-i18n="bio_teaching"></span></p>
+      </article>
     </section>
 
-    <section id="portfolio">
-      <h2>（四）個人作品展示連結（如適用）</h2>
-      <p class="req">「圖冊／作品集」內頁請勿展示聯絡方式（依機構指引）。以下連結僅作作品參考。</p>
-      <div class="card">
-        <p><strong>線上作品集：</strong><a href="https://kenartgallery.netlify.app/2025/" target="_blank" rel="noopener noreferrer">kenartgallery.netlify.app/2025/</a>（3D 展廳）</p>
-      </div>
+    <section id="portfolio" aria-labelledby="h-portfolio">
+      <h2 id="h-portfolio" data-i18n="h_portfolio">（四）個人作品展示連結（如適用）</h2>
+      <p class="note" data-i18n="note_portfolio"></p>
+      <p><strong data-i18n="portfolio_label"></strong><a href="https://kenartgallery.netlify.app/2025/" target="_blank" rel="noopener noreferrer" data-i18n="portfolio_url">kenartgallery.netlify.app/2025/</a><span data-i18n="portfolio_suffix"></span></p>
     </section>
 
     <footer>
-      <p>本文件僅供 CSMA Family 收生配對及向家長／學生作導師介紹之用；提交即表示同意機構依其流程發放相關資料。條款與課程細則請以 <a href="http://csmafamily.hk" target="_blank" rel="noopener noreferrer">csmafamily.hk</a> 公布為準。</p>
+      <p>
+        <span data-i18n="footer_before"></span><a href="http://csmafamily.hk" target="_blank" rel="noopener noreferrer">csmafamily.hk</a><span data-i18n="footer_after"></span>
+      </p>
     </footer>
-  </div>
+  </main>
 
-  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="圖片預覽（點擊空白處或按 Esc 關閉）">
-    <div class="lightbox-inner" tabindex="-1">
-      <img class="lightbox-img" src="" alt="" />
-      <p class="lightbox-caption" hidden></p>
-    </div>
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <img class="lightbox-img" src="" alt="" tabindex="-1" decoding="async" />
+    <p class="lightbox-caption" hidden></p>
   </div>
 
   <script>
     (function () {
+      var STR = {
+        "zh-Hant": {
+          doc_title: "Kenneth Ho Kwan Wong · 黃浩均 — 個人資歷簡介（CSMA Family）",
+          lang_bar_aria: "介面語言",
+          title_h1: "Kenneth Ho Kwan Wong · 黃浩均",
+          tagline: "視覺藝術／創意藝術導師 · 註冊教師（香港）· UK QTS · 可英語授課",
+          badge: "擬任教：多元創意藝術｜塑膠彩｜水彩",
+          h_photo: "（一）形象／教學／創作照片",
+          h_works: "（二）個人視藝作品（分列擬任教項目）",
+          h_acrylic: "塑膠彩課程",
+          h_multimedia: "多元創意藝術課程",
+          h_watercolour: "水彩課程",
+          h_bio: "（三）個人文字簡介",
+          h_portfolio: "（四）個人作品展示連結（如適用）",
+          note_portfolio: "「圖冊／作品集」內頁請勿展示聯絡方式（依機構指引）。以下連結僅作作品參考。",
+          portfolio_label: "線上作品集：",
+          portfolio_url: "kenartgallery.netlify.app/2025/",
+          portfolio_suffix: "（3D 展廳）",
+          footer_before: "本文件僅供 CSMA Family 收生配對及向家長／學生作導師介紹之用；提交即表示同意機構依其流程發放相關資料。條款與課程細則請以 ",
+          footer_after: " 公布為準。",
+          cap_teaching: "教學照片",
+          cap_acrylic: "塑膠彩",
+          cap_mixed: "拼貼、混合媒材",
+          cap_collage: "拼貼畫",
+          cap_watercolour: "水彩",
+          enlarge: "放大檢視：",
+          lightbox_aria: "圖片預覽（點擊空白處或按 Esc 關閉）",
+          bio_1: "黃浩均（Kenneth Ho Kwan Wong）畢業於香港理工大學視覺傳達設計，其後於英國愛丁堡大學取得聲音設計碩士，並在英國伯明翰大學完成中學設計與科技科 PGCE，現為香港註冊教師及英國合資格教師（QTS）。",
+          bio_2: "藝術方面，他早年修讀視覺藝術，於 HKCEE 與 HKAL 視覺藝術科皆考獲 A 級，先以藝術創作為起點，其後再延伸及平面與多媒體設計，並長期從事跨領域創作；亦曾於英國中學任設計與科技教師及班主任，熟悉課堂管理、專業繪圖、評估與照顧多元學習需要。2026 年回港後於本港中學任教視覺藝術，指導非華語學生完成 HKDSE SBA 及課業紀錄，教授超現實主義、立體主義與極簡主義等課題。",
+          bio_strong_courses: "擬任教科目：",
+          bio_courses: "多元創意藝術（混合媒體、拼貼與綜合創作）、塑膠彩、水彩。",
+          bio_strong_teaching: "教學理念：",
+          bio_teaching: "相信「透過動手、邊做邊觀察」，理解會慢慢成形；以實作帶動思考，配合示範，讓不同年齡學員累積經驗、發展個人視覺語言。授課語言：粵語、英語、普通話。"
+        },
+        en: {
+          doc_title: "Kenneth Wong — Tutor profile (CSMA Family)",
+          lang_bar_aria: "Language",
+          title_h1: "Kenneth Wong",
+          tagline: "Visual arts & creative arts tutor · Hong Kong registered teacher · UK QTS · English-medium teaching available",
+          badge: "Courses offered: multi-media creative arts · acrylic painting · watercolour",
+          h_photo: "(1) Portrait & teaching photo",
+          h_works: "(2) Selected artworks by course",
+          h_acrylic: "Acrylic painting",
+          h_multimedia: "Multi-media creative arts",
+          h_watercolour: "Watercolour",
+          h_bio: "(3) About",
+          h_portfolio: "(4) Portfolio link (optional)",
+          note_portfolio: "Portfolio pages should not display contact details (per centre guidelines). The link below is for work samples only.",
+          portfolio_label: "Online portfolio: ",
+          portfolio_url: "kenartgallery.netlify.app/2025/",
+          portfolio_suffix: " (3D gallery)",
+          footer_before: "This document is for CSMA Family to introduce Kenneth Wong as a tutor to parents and students. Submission indicates agreement for the centre to share it as part of enrolment. See ",
+          footer_after: " for terms and course details.",
+          cap_teaching: "Teaching photo",
+          cap_acrylic: "Acrylic painting",
+          cap_mixed: "Collage & mixed media",
+          cap_collage: "Collage",
+          cap_watercolour: "Watercolour",
+          enlarge: "Enlarge: ",
+          lightbox_aria: "Image preview (click outside or press Esc to close)",
+          bio_1: "Kenneth Wong holds a BA in Visual Communication Design (Hong Kong Polytechnic University), an MSc in Sound Design (University of Edinburgh), and a PGCE in Secondary Design and Technology (University of Birmingham). He is a Hong Kong registered teacher and holds UK Qualified Teacher Status (QTS).",
+          bio_2: "His creative path began with visual art in secondary school: Grade A in HKCEE and HKAL Visual Art, then art-led practice before extending into visual communication and multimedia design. He taught Design & Technology in UK secondary schools (including as a Year 7 form tutor), with strong experience in classroom management, technical drawings, assessment, and supporting diverse learners. In 2026 he returned to Hong Kong to teach visual arts in local secondary schools, including HKDSE SBA support for NCS students and units on surrealism, cubism, and minimalism.",
+          bio_strong_courses: "Courses offered: ",
+          bio_courses: "Multi-media creative arts (mixed media, collage, and integrated projects), acrylic painting, and watercolour.",
+          bio_strong_teaching: "Teaching approach: ",
+          bio_teaching: "Practice-led: students learn by doing and observing how materials and colour behave, and reflect as they work; clear demonstrations help learners build confidence and a personal visual voice. Languages: Cantonese, English, Mandarin."
+        }
+      };
+
+      var LANG_STORAGE = "vatutor_lang";
+      var btnZh = document.getElementById("lang-zh");
+      var btnEn = document.getElementById("lang-en");
       var lb = document.getElementById("lightbox");
-      if (!lb) return;
-      var inner = lb.querySelector(".lightbox-inner");
-      var lbImg = lb.querySelector(".lightbox-img");
-      var lbCap = lb.querySelector(".lightbox-caption");
+      var lbImg = lb ? lb.querySelector(".lightbox-img") : null;
+      var lbCap = lb ? lb.querySelector(".lightbox-caption") : null;
       var lastFocus = null;
 
-      function close() {
+      function t(lang, key) {
+        var pack = STR[lang] || STR["zh-Hant"];
+        return pack[key] != null ? pack[key] : key;
+      }
+
+      function applyLang(lang) {
+        if (lang !== "en") lang = "zh-Hant";
+        document.documentElement.lang = lang === "en" ? "en" : "zh-Hant";
+        document.title = t(lang, "doc_title");
+
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          var k = el.getAttribute("data-i18n");
+          if (!k) return;
+          el.textContent = t(lang, k);
+        });
+
+        var lbEl = document.getElementById("lightbox");
+        if (lbEl) {
+          lbEl.setAttribute("aria-label", t(lang, "lightbox_aria"));
+        }
+
+        var navLang = document.querySelector(".lang-bar");
+        if (navLang) {
+          navLang.setAttribute("aria-label", t(lang, "lang_bar_aria"));
+        }
+
+        var pre = t(lang, "enlarge");
+        document.querySelectorAll(".lightbox-trigger[data-cap]").forEach(function (btn) {
+          var ck = btn.getAttribute("data-cap");
+          var capKey = "cap_" + ck;
+          var cap = t(lang, capKey);
+          btn.setAttribute("data-caption", cap);
+          btn.setAttribute("aria-label", pre + cap);
+          var im = btn.querySelector("img");
+          if (im) im.setAttribute("alt", cap);
+        });
+
+        if (btnZh && btnEn) {
+          var isZh = lang !== "en";
+          btnZh.classList.toggle("is-active", isZh);
+          btnEn.classList.toggle("is-active", !isZh);
+          btnZh.setAttribute("aria-pressed", isZh ? "true" : "false");
+          btnEn.setAttribute("aria-pressed", isZh ? "false" : "true");
+        }
+
+        try {
+          localStorage.setItem(LANG_STORAGE, lang === "en" ? "en" : "zh-Hant");
+        } catch (e) {}
+      }
+
+      var initial = "zh-Hant";
+      try {
+        var saved = localStorage.getItem(LANG_STORAGE);
+        if (saved === "en" || saved === "zh-Hant") initial = saved;
+      } catch (e) {}
+      applyLang(initial);
+
+      if (btnZh) btnZh.addEventListener("click", function () { applyLang("zh-Hant"); });
+      if (btnEn) btnEn.addEventListener("click", function () { applyLang("en"); });
+
+      if (!lb || !lbImg) return;
+
+      function closeLb() {
         lb.classList.remove("is-open");
         lb.setAttribute("aria-hidden", "true");
         document.body.classList.remove("lightbox-on");
@@ -365,14 +529,12 @@
           lbCap.hidden = true;
         }
         if (lastFocus) {
-          try {
-            lastFocus.focus();
-          } catch (e) {}
+          try { lastFocus.focus(); } catch (e) {}
           lastFocus = null;
         }
       }
 
-      function open(btn) {
+      function openLb(btn) {
         var img = btn.querySelector("img");
         if (!img) return;
         var src = img.getAttribute("src");
@@ -393,24 +555,18 @@
         lb.classList.add("is-open");
         lb.setAttribute("aria-hidden", "false");
         document.body.classList.add("lightbox-on");
-        if (inner) {
-          try {
-            inner.focus();
-          } catch (e) {}
-        }
+        try { lbImg.focus(); } catch (e) {}
       }
 
       document.querySelectorAll(".lightbox-trigger").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          open(btn);
-        });
+        btn.addEventListener("click", function () { openLb(btn); });
       });
 
       lb.addEventListener("click", function (e) {
-        if (e.target === lb) close();
+        if (e.target === lb) closeLb();
       });
       document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && lb.classList.contains("is-open")) close();
+        if (e.key === "Escape" && lb.classList.contains("is-open")) closeLb();
       });
     })();
   </script>
