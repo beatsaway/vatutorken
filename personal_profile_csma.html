@@ -23,6 +23,7 @@
       background: var(--bg);
       line-height: 1.65;
     }
+    body.lightbox-on { overflow: hidden; }
     .wrap {
       max-width: 920px;
       margin: 0 auto;
@@ -83,11 +84,27 @@
     figure {
       margin: 0;
     }
-    .photo-main img {
+    .thumb-btn {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border: none;
+      background: transparent;
+      cursor: zoom-in;
+      font: inherit;
+      color: inherit;
+    }
+    .thumb-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+    .photo-main .thumb-btn img {
       width: 100%;
       height: auto;
       display: block;
       border-radius: 8px;
+      vertical-align: middle;
     }
     .grid {
       display: grid;
@@ -100,13 +117,12 @@
       border-radius: 10px;
       overflow: hidden;
     }
-    .piece > img {
+    .piece > .thumb-btn > img {
       width: 100%;
       height: 200px;
       object-fit: cover;
       display: block;
     }
-    /* Portrait originals: show full image without landscape crop */
     .piece.thumb-portrait .img-wrap {
       display: flex;
       align-items: center;
@@ -115,6 +131,12 @@
       max-height: 340px;
       background: #e8e4db;
       padding: 0.45rem 0.35rem;
+    }
+    .piece.thumb-portrait .img-wrap .thumb-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 300px;
     }
     .piece.thumb-portrait .img-wrap img {
       width: auto;
@@ -149,6 +171,76 @@
       font-size: 0.78rem;
       color: var(--muted);
     }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+      background: rgba(0, 0, 0, 0.92);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+    .lightbox.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .lightbox-inner {
+      position: relative;
+      max-width: min(96vw, 1400px);
+      max-height: 92vh;
+      margin: auto;
+    }
+    .lightbox-img {
+      display: block;
+      max-width: min(96vw, 1400px);
+      max-height: 85vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      margin: 0 auto;
+      border-radius: 6px;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -44px;
+      right: 0;
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease;
+    }
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.28);
+    }
+    .lightbox-close:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+    .lightbox-caption {
+      margin: 12px 0 0;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.95rem;
+    }
+    .lightbox-caption[hidden] {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -159,27 +251,31 @@
       <span class="badge">擬任教：多元創意藝術｜塑膠彩｜水彩（不包括素描）</span>
     </header>
 
-    <!-- 1) 形象／教學照片 -->
     <section id="photo">
       <h2>（一）形象／教學／創作照片</h2>
       <figure class="card photo-main">
-        <img src="teaching_photo.png" alt="教學照片" width="1200" height="800" />
+        <button type="button" class="thumb-btn lightbox-trigger" data-caption="教學照片" aria-label="放大檢視：教學照片">
+          <img src="teaching_photo.webp" alt="教學照片" width="1200" height="800" loading="lazy" decoding="async" />
+        </button>
       </figure>
     </section>
 
-    <!-- 2) 作品：每科兩幅（機構要求一至兩幅） -->
     <section id="works">
       <h2>（二）個人視藝作品（分列擬任教項目）</h2>
 
       <h3>塑膠彩課程</h3>
       <div class="grid">
         <div class="piece">
-          <img src="acrylic_0.png" alt="塑膠彩" />
+          <button type="button" class="thumb-btn lightbox-trigger" data-caption="塑膠彩" aria-label="放大檢視：塑膠彩">
+            <img src="acrylic_0.webp" alt="塑膠彩" loading="lazy" decoding="async" />
+          </button>
           <div class="cap">塑膠彩</div>
         </div>
         <div class="piece thumb-portrait">
           <div class="img-wrap">
-            <img src="acrylic_自由的窗口.png" alt="塑膠彩" />
+            <button type="button" class="thumb-btn lightbox-trigger" data-caption="塑膠彩" aria-label="放大檢視：塑膠彩">
+              <img src="acrylic_自由的窗口.webp" alt="塑膠彩" loading="lazy" decoding="async" />
+            </button>
           </div>
           <div class="cap">塑膠彩</div>
         </div>
@@ -188,12 +284,16 @@
       <h3>多元創意藝術課程</h3>
       <div class="grid">
         <div class="piece">
-          <img src="multimedia_acrylic+correctionpen.png" alt="塑膠彩、改錯筆" />
+          <button type="button" class="thumb-btn lightbox-trigger" data-caption="塑膠彩、改錯筆" aria-label="放大檢視：塑膠彩、改錯筆">
+            <img src="multimedia_acrylic+correctionpen.webp" alt="塑膠彩、改錯筆" loading="lazy" decoding="async" />
+          </button>
           <div class="cap">塑膠彩、改錯筆</div>
         </div>
         <div class="piece thumb-portrait">
           <div class="img-wrap">
-            <img src="multimedia_拼貼畫1.png" alt="拼貼畫" />
+            <button type="button" class="thumb-btn lightbox-trigger" data-caption="拼貼畫" aria-label="放大檢視：拼貼畫">
+              <img src="multimedia_拼貼畫1.webp" alt="拼貼畫" loading="lazy" decoding="async" />
+            </button>
           </div>
           <div class="cap">拼貼畫</div>
         </div>
@@ -202,17 +302,20 @@
       <h3>水彩課程</h3>
       <div class="grid">
         <div class="piece">
-          <img src="watercolour_cablecar.png" alt="水彩" />
+          <button type="button" class="thumb-btn lightbox-trigger" data-caption="水彩" aria-label="放大檢視：水彩">
+            <img src="watercolour_cablecar.webp" alt="水彩" loading="lazy" decoding="async" />
+          </button>
           <div class="cap">水彩</div>
         </div>
         <div class="piece">
-          <img src="watercolour_redcliff.webp" alt="水彩" />
+          <button type="button" class="thumb-btn lightbox-trigger" data-caption="水彩" aria-label="放大檢視：水彩">
+            <img src="watercolour_redcliff.webp" alt="水彩" loading="lazy" decoding="async" />
+          </button>
           <div class="cap">水彩</div>
         </div>
       </div>
     </section>
 
-    <!-- 3) 中英對照簡介 -->
     <section id="bio">
       <h2>（三）個人文字簡介（可英語授課 · 中英對照）</h2>
       <div class="bilingual">
@@ -233,7 +336,6 @@
       </div>
     </section>
 
-    <!-- 4) 作品展示連結 -->
     <section id="portfolio">
       <h2>（四）個人作品展示連結（如適用）</h2>
       <p class="req">「圖冊／作品集」內頁請勿展示聯絡方式（依機構指引）。以下連結僅作作品參考。</p>
@@ -246,5 +348,80 @@
       <p>本文件僅供 CSMA Family 收生配對及向家長／學生作導師介紹之用；提交即表示同意機構依其流程發放相關資料。條款與課程細則請以 <a href="http://csmafamily.hk" target="_blank" rel="noopener noreferrer">csmafamily.hk</a> 公布為準。</p>
     </footer>
   </div>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="圖片預覽">
+    <div class="lightbox-inner">
+      <button type="button" class="lightbox-close" aria-label="關閉預覽">&times;</button>
+      <img class="lightbox-img" src="" alt="" />
+      <p class="lightbox-caption" hidden></p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var lb = document.getElementById("lightbox");
+      if (!lb) return;
+      var lbImg = lb.querySelector(".lightbox-img");
+      var lbCap = lb.querySelector(".lightbox-caption");
+      var btnClose = lb.querySelector(".lightbox-close");
+      var lastFocus = null;
+
+      function close() {
+        lb.classList.remove("is-open");
+        lb.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lightbox-on");
+        lbImg.removeAttribute("src");
+        lbImg.alt = "";
+        if (lbCap) {
+          lbCap.textContent = "";
+          lbCap.hidden = true;
+        }
+        if (lastFocus) {
+          try {
+            lastFocus.focus();
+          } catch (e) {}
+          lastFocus = null;
+        }
+      }
+
+      function open(btn) {
+        var img = btn.querySelector("img");
+        if (!img) return;
+        var src = img.getAttribute("src");
+        if (!src) return;
+        lastFocus = btn;
+        lbImg.src = src;
+        lbImg.alt = img.getAttribute("alt") || "";
+        var cap = btn.getAttribute("data-caption");
+        if (lbCap) {
+          if (cap) {
+            lbCap.textContent = cap;
+            lbCap.hidden = false;
+          } else {
+            lbCap.textContent = "";
+            lbCap.hidden = true;
+          }
+        }
+        lb.classList.add("is-open");
+        lb.setAttribute("aria-hidden", "false");
+        document.body.classList.add("lightbox-on");
+        btnClose.focus();
+      }
+
+      document.querySelectorAll(".lightbox-trigger").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          open(btn);
+        });
+      });
+
+      lb.addEventListener("click", function (e) {
+        if (e.target === lb) close();
+      });
+      btnClose.addEventListener("click", close);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && lb.classList.contains("is-open")) close();
+      });
+    })();
+  </script>
 </body>
 </html>

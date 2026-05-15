@@ -1,6 +1,7 @@
-# Not used by personal_profile_csma.html
+# Local / unused sources (page uses WebP only)
 instructions
-2026_05_15_13d_Kleki.png
-acrylic_mydream.png
-watercolour_lake.png
-multimedia_拼貼畫2.png
+*.png
+2026_05_15_13d_Kleki.webp
+acrylic_mydream.webp
+watercolour_lake.webp
+multimedia_拼貼畫2.webp
